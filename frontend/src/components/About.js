@@ -4,8 +4,8 @@ import React from "react";
 const About = () => {
 
   return <div className="container">
-    <h4>This is about iNotebook:</h4>
-    <p className="mx-3 mt-5"> Using iNotebook you could-</p>
+    <h4>This is about Notebook:</h4>
+    <p className="mx-3 mt-5"> Using Notebook you could-</p>
     <ul className="list-group list-group-flush list-group-numbered mx-5">
       <li className="list-group-item">Write your personal / proffesional notes</li>
       <li className="list-group-item">Secure your notes on clould</li>

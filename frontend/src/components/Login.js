@@ -34,14 +34,14 @@ function Login(props) {
     return (
         <div>
             <div className='text-center my-4'>
-                <h1>iNOTEBOOK</h1>
+                <h1>NOTEBOOK</h1>
                 <p><b>Your notes on cloud ☁️</b></p>
             </div>
 
            
 
             <div className="container my-5">
-            <p className="text-center"><i>Login to continue using iNotebook 😊 </i></p>
+            <p className="text-center"><i>Login to continue using Notebook 😊 </i></p>
                 <div className="mb-3 ">
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input type="email" className="form-control" onChange={onchange} id="email" name="email" placeholder="name@example.com" />

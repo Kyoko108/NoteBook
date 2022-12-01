@@ -38,4 +38,4 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, console.log(`iNotebook backend listening on port ${PORT}`))
+app.listen(PORT, console.log(`Notebook backend listening on port ${PORT}`))

@@ -51,7 +51,7 @@ function SignUp(props) {
     return (
         <>
             <div className='text-center'>
-                <h1>iNOTEBOOK</h1>
+                <h1>NOTEBOOK</h1>
                 <p><b>Your notes on cloud ☁️</b></p>
             </div>
 
@@ -59,7 +59,7 @@ function SignUp(props) {
             
 
                 <div className="container my-5">
-                <p className="text-center my-3"><i>New to iNotebook? 👉🏻Create a new account here! </i></p>
+                <p className="text-center my-3"><i>New to Notebook? 👉🏻Create a new account here! </i></p>
                     <div className="mb-3 ">
                         <label htmlFor="email" className="form-label">Email address</label>
                         <input type="email" className="form-control" onChange={onchange} id="email" name="email" placeholder="name@example.com" required />
