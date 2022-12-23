@@ -72,7 +72,6 @@ Format of .env file
 PORT: 5000
 MONGO_URL = YOUR_MONGO_URL
 NODE_ENV = production
-
 ```
 
 
