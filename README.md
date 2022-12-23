@@ -7,7 +7,7 @@
 Using Notebook you could-  Write your personal / proffesional notes Secure your notes on clould Access your notes from anywhere / from any devices Edit or Delete your notes Give your notes a perticular tag Maintaine privacy using credentials
 
 # Features
-1. Here notebook is created using React as a frontend and NodeJS as a backend.<br> 2. Here you can add , delete and update notes in your Mongoose database. <br>3. You create a password using express validation , authentication using JWT Token and salting.<br> 4. An easy way to sign up and log in a notebook, context for data passing through the component.
+<br>1. Here notebook is created using React as a frontend and NodeJS as a backend.<br> 2. Here you can add , delete and update notes in your Mongoose database. <br>3. You create a password using express validation , authentication using JWT Token and salting.<br> 4. An easy way to sign up and log in a notebook, context for data passing through the component.
 
 
 
