@@ -1,4 +1,4 @@
-# Hii I am Rajat Singh & I welcome you to Script Winter of Code
+# Hii I am Rajat Singh & I welcome you to Script Winter of Code(SWOC)
 ## Give a star to the repository if you like it ⭐ 
 <div align="center">
       <h1>Notebook --  <a href="https://mern-notebook.onrender.com/" target="_blank"><img alt="" src="https://img.shields.io/badge/Website-EA4C89?style=normal&logo=dribbble&logoColor=white" style="vertical-align:center"/></a> <a href="https://www.linkedin.com/in/rajat-singh-b6a92b212/}" target="_blank"><img alt="" src="https://img.shields.io/badge/LinkedIn-0077B5?style=normal&logo=linkedin&logoColor=white" style="vertical-align:center" /></a> </h1></div>
