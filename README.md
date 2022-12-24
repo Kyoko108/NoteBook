@@ -1,3 +1,5 @@
+# Hii I am Rajat Singh & I welcome you to Script Winter of Code
+## Give a star to the repository if you like it ⭐ 
 ## Script Winter of Code
 
 Script Winter of Code is an Open Source program for everyone to get started with open source.
