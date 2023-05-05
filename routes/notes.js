@@ -54,6 +54,7 @@ router.put('/updatenote/:id', fetchuser,
             if (title) { newNote.title = title };
             if (description) { newNote.description = description };
             if (tag) { newNote.tag = tag };
+            newNote.date=Date.now();
 
             //find the note to be updated and update it
             let note = await Notes.findById(req.params.id);
