@@ -37,7 +37,9 @@ function Navbar() {
 
                         {!localStorage.getItem('token') ?
                             <form className='d-flex'>
+                            
                                 <Link to="/login" className={`nav-link ${location.pathname === "/login" ? "active" : ""}`} >Login</Link>
+
                                 <Link to="/signup" className={`nav-link ${location.pathname === "/signup" ? "active" : ""}`} >SignUp</Link>
                             </form> :
                             <Link to="/login" onClick={handleLogout} className={`nav-link ${location.pathname === "/logout" ? "active" : ""}`} >Logout</Link>
