@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link,useLocation} from 'react-router-dom'
 
 function Login(props) {
-
+    
+    const location = useLocation();
     const [credentials, setCredentials] = useState({ email: "", password: "" })
     let history = useNavigate();
 
@@ -56,7 +57,7 @@ function Login(props) {
                 <button className='btn btn-primary' onClick={handleClick}>Login</button>
             </div>
             <br/>
-            <p className='text-center last-para'>Don't have an account? <a href="/signup">SignUp-&gt;</a> </p>
+            <p className='text-center last-para'>Don't have an account?  <Link to="/signup" className={`nav-link ${location.pathname === "/signup" ? "active" : ""}`} >SignUp</Link> </p>
         </div>
     )
 }
