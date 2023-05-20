@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import NoteContext from '../context/notes/noteContext'
-
+import "./noteitem.css"
 function NoteItems(props) {
     const { note, updateNote } = props;
 
@@ -16,8 +16,8 @@ function NoteItems(props) {
     date = date.slice(0, -14).split('-').reverse().join('-');
 
     return (
-        <div className='col-sm-4 col-md-3 my-2' >
-            <div className="card " >
+        <div className='col-sm-4 col-md-3 my-2 ' >
+            <div className="card mh-100" >
 
                 <div className="card-body">
 
