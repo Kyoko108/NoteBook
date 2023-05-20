@@ -104,8 +104,8 @@ function Navbar() {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="40"
-                  height="40"
+                  width="25"
+                  height="25"
                   fill="currentColor"
                   class="bi bi-box-arrow-right h3"
                   viewBox="0 0 16 16"
