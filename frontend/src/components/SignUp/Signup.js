@@ -26,7 +26,7 @@ function SignUp(props) {
     //name
     if (!inputValues.name.trim()) {
       errors.name = "Name is required";
-    }else if(inputValues.name.length<=6){
+    } else if (inputValues.name.length <= 6) {
       errors.name = "Please enter at least characters";
     } else {
       errors.name = "";
@@ -172,7 +172,9 @@ function SignUp(props) {
               value={inputValues.name}
             />
           </div>
-          <div className="showAlert">{validation.name && <p>{validation.name}</p>}</div>
+          <div className="showAlert">
+            {validation.name && <p>{validation.name}</p>}
+          </div>
           {/* {validation.name && console.log(validation)} */}
           <div className="mb-3 ">
             <label htmlFor="email" className="form-label">
@@ -189,7 +191,9 @@ function SignUp(props) {
               required
             />
           </div>
-          <div className="showAlert">{validation.email && <p>{validation.email}</p>}</div>
+          <div className="showAlert">
+            {validation.email && <p>{validation.email}</p>}
+          </div>
           <div className="mb-3 ">
             <label htmlFor="password" className="form-label">
               Password
@@ -205,7 +209,9 @@ function SignUp(props) {
               required
             />
           </div>
-          <div className="showAlert">{validation.password && <p>{validation.password}</p>}</div>
+          <div className="showAlert">
+            {validation.password && <p>{validation.password}</p>}
+          </div>
           <div className="mb-3 ">
             <label htmlFor="cpassword" className="form-label">
               Confirm Password
@@ -221,7 +227,9 @@ function SignUp(props) {
               required
             />
           </div>
-          <div className="showAlert">{validation.cPassword && <p>{validation.cPassword}</p>}</div>
+          <div className="showAlert">
+            {validation.cPassword && <p>{validation.cPassword}</p>}
+          </div>
         </div>
         <div className="text-center">
           <button type="submit" className="btn btn-primary">
