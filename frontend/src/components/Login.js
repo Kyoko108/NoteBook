@@ -1,21 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-
 
 function Login(props) {
   const location = useLocation();
-   const [credentials, setCredentials] = useState({ email: "", password: "" });
- 
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [guestLoginClicked, setGuestLoginClicked] = useState(false);
   let history = useNavigate();
 
   const onchange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
- 
+  useEffect(() => {
+    if (guestLoginClicked) {
+      handleClick();
+    }
+  }, [guestLoginClicked]);
+  const handleGuestLogin = () => {
+    setCredentials({ email: "guest@gmail.com", password: "guest" });
+    setGuestLoginClicked(true);
+  };
 
   const handleClick = async () => {
-
     const response = await fetch("api/auth/login", {
       method: "POST",
       headers: {
@@ -30,13 +36,13 @@ function Login(props) {
     console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.authtoken);
+      localStorage.setItem("name", json.name);
       history("/");
       props.showAlert("Logged in successfully", "success");
     } else {
       props.showAlert("Invalid Credentials", "danger");
     }
   };
-
 
   return (
     <div>
@@ -62,9 +68,9 @@ function Login(props) {
             id="email"
             name="email"
             placeholder="name@example.com"
-            requird
           />
         </div>
+
         <div className="mb-3 ">
           <label htmlFor="password" className="form-label">
             Password
@@ -79,8 +85,11 @@ function Login(props) {
         </div>
       </div>
       <div className="text-center">
-        <button className="btn btn-primary" onClick={handleClick}>
+        <button className="btn btn-primary m-2" onClick={handleClick}>
           Login
+        </button>
+        <button className="btn btn-secondary" onClick={handleGuestLogin}>
+          Login as guest
         </button>
       </div>
       <br />
