@@ -16,7 +16,7 @@ function Navbar() {
         style={{ backgroundColor: "#e3f2fd", opacity: "70%" }}
       >
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/notes">
             NOTEBOOK
           </a>
           <button
