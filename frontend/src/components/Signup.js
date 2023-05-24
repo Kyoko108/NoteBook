@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Signup.css";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 
 function SignUp(props) {
@@ -26,8 +25,8 @@ function SignUp(props) {
     //name
     if (!inputValues.name.trim()) {
       errors.name = "Name is required";
-    } else if (inputValues.name.length <= 6) {
-      errors.name = "Please enter at least characters";
+    } else if (inputValues.name.length < 5) {
+      errors.name = "Please enter at least 6 characters";
     } else {
       errors.name = "";
     }
@@ -172,7 +171,7 @@ function SignUp(props) {
               value={inputValues.name}
             />
           </div>
-          <div className="showAlert">
+          <div className="showAlert" style={{color: "red"}}>
             {validation.name && <p>{validation.name}</p>}
           </div>
           {/* {validation.name && console.log(validation)} */}
@@ -191,7 +190,7 @@ function SignUp(props) {
               required
             />
           </div>
-          <div className="showAlert">
+          <div className="showAlert" style={{color: "red"}}>
             {validation.email && <p>{validation.email}</p>}
           </div>
           <div className="mb-3 ">
@@ -209,7 +208,7 @@ function SignUp(props) {
               required
             />
           </div>
-          <div className="showAlert">
+          <div className="showAlert" style={{color: "red"}}>
             {validation.password && <p>{validation.password}</p>}
           </div>
           <div className="mb-3 ">
@@ -227,7 +226,7 @@ function SignUp(props) {
               required
             />
           </div>
-          <div className="showAlert">
+          <div className="showAlert" style={{color: "red"}}>
             {validation.cPassword && <p>{validation.cPassword}</p>}
           </div>
         </div>

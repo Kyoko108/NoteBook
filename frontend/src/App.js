@@ -7,8 +7,8 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NoteState from "./context/notes/NoteState";
 import Alert from "./components/Alert";
-import SignUp from "./components/SignUp/Signup";
-import Login from "./components/Login/Login";
+import SignUp from "./components/Signup";
+import Login from "./components/Login";
 import Page404 from "./components/Page404";
 
 function App() {
