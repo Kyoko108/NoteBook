@@ -15,7 +15,30 @@ function Notes(props) {
   });
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("newest");
+  const [tag, setTags] = useState("All");
 
+  //sort and filter
+  const transformedNotes = () => {
+    let sortedNotes = notes;
+    sortedNotes = sortedNotes.sort((a, b) => {
+      const aCreatedAt = new Date(a.date);
+      const bCreatedAt = new Date(b.date);
+      return sort === "newest"
+        ? bCreatedAt - aCreatedAt
+        : aCreatedAt - bCreatedAt;
+    });
+
+    if (tag && tag !== "All") {
+      sortedNotes = sortedNotes?.filter(
+        (item) => item.tag.toLowerCase() === tag.toLowerCase()
+      );
+    }
+
+    return sortedNotes;
+  };
+
+  useEffect(() => {}, [notes]);
   useEffect(() => {
     if (localStorage.getItem("token")) {
       getNote();
@@ -63,6 +86,29 @@ function Notes(props) {
             }}
           />
         </div>
+        <div className="d-flex justify-content-between">
+          <div>
+            <span className="">Date </span>
+            <select className="" onChange={(e) => setSort(e.target.value)}>
+              <option disabled>By date</option>
+              <option value="newest">newest</option>
+              <option value="oldest">oldest</option>
+            </select>
+          </div>
+          <div className="m-2">
+            <label htmlFor="tag" className="form-label">
+              Tag
+            </label>
+            <select onChange={(e) => setTags(e.target.value)}>
+              <option value="All">All</option>
+              <option value="Todo">Todo</option>
+              <option value="Important">Important</option>
+              <option value="Academic">Academic</option>
+              <option value="Personal">Personal</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <EditNote
@@ -77,7 +123,7 @@ function Notes(props) {
         <div className="mx-3">
           {notes.length === 0 && "No notes to display.."}
         </div>
-        {notes
+        {transformedNotes()
           .filter((item) => {
             return item.title.toLowerCase().includes(search) && item;
           })
