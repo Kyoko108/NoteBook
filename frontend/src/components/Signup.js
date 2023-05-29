@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,useLocation,Link } from 'react-router-dom'
 
 function SignUp(props) {
 
     const [credentials, setCredentials] = useState({ email: "", name: "", password: "", cpassword: "" })
     let history = useNavigate();
 
+    const location = useLocation();
     const onchange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
 
@@ -81,7 +82,8 @@ function SignUp(props) {
                     <button type="submit" className='btn btn-primary' >SignUp</button>
                 </div>
                 <br/>
-                <p className='text-center last-para'>Already have an account? <a href="/login">Login-&gt;</a> </p>
+                <p className='text-center last-para'>Already have an account?  <Link to="/login" className={`nav-link ${location.pathname === "/login" ? "active" : ""}`} >Login</Link>
+ </p>
             </form>
         </>
     )
