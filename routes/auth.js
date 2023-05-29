@@ -62,7 +62,7 @@ router.post(
 
       var authtoken = jwt.sign(data, secret);
       success = true;
-      res.send({ success, authtoken ,name:req.body.name });
+      res.send({ success, authtoken });
       //end of jwt use
     } catch (error) {
       console.log(error.message);
@@ -96,7 +96,6 @@ router.post(
           .status(400)
           .json({ success, error: "Please login using correct credentials" });
       }
-      console.log(user)
       // use of bcrypt to compare password it return true or false
       let passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
@@ -112,7 +111,7 @@ router.post(
       };
       var authtoken = jwt.sign(data, secret);
       success = true;
-      res.json({ success, authtoken ,name:user.name});
+      res.json({ success, authtoken });
       //end of jwt use
     } catch (error) {
       console.log(error.message);

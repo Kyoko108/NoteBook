@@ -1,145 +1,83 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import NoteContext from "../context/notes/noteContext";
-import EditNote from "./EditNote";
-import NoteItems from "./NoteItems";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import NoteContext from '../context/notes/noteContext'
+import EditNote from './EditNote';
+import NoteItems from './NoteItems';
+import { useNavigate } from 'react-router-dom'
 
 function Notes(props) {
-  const context = useContext(NoteContext);
-  const { notes, getNote, editNote } = context;
-  const [enote, setenote] = useState({
-    id: "",
-    title: "",
-    description: "",
-    tag: "default",
-  });
-  const navigate = useNavigate();
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("newest");
-  const [tag, setTags] = useState("All");
+    const context = useContext(NoteContext);
+    const { notes, getNote, editNote } = context;
+    const [enote, setenote] = useState({ id: "", title: "", description: "", tag: "default" })
+    const navigate = useNavigate();
+    const [search, setSearch] = useState("")
 
-  //sort and filter
-  const transformedNotes = () => {
-    let sortedNotes = notes;
-    sortedNotes = sortedNotes.sort((a, b) => {
-      const aCreatedAt = new Date(a.date);
-      const bCreatedAt = new Date(b.date);
-      return sort === "newest"
-        ? bCreatedAt - aCreatedAt
-        : aCreatedAt - bCreatedAt;
-    });
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            getNote()
+        } else {
+            navigate('/login')
 
-    if (tag && tag !== "All") {
-      sortedNotes = sortedNotes?.filter(
-        (item) => item.tag.toLowerCase() === tag.toLowerCase()
-      );
+        }
+        // eslint-disable-next-line
+
+    }, [])
+
+    const ref = useRef(null);
+    const refclose = useRef(null);
+
+    const updateNote = (currentNote) => {
+        ref.current.click()
+        setenote(currentNote)
     }
 
-    return sortedNotes;
-  };
-
-  useEffect(() => {}, [notes]);
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      getNote();
-    } else {
-      navigate("/login");
+    const onchange = (e) => {
+        setenote({ ...enote, [e.target.name]: e.target.value })
     }
-    // eslint-disable-next-line
-  }, []);
 
-  const ref = useRef(null);
-  const refclose = useRef(null);
+    const handleEdit = (e) => {
+        e.preventDefault();
+        editNote(enote._id, enote.title, enote.description, enote.tag)
+        refclose.current.click()
 
-  const updateNote = (currentNote) => {
-    ref.current.click();
-    setenote(currentNote);
-  };
+        props.showAlert("Note is updated successfully", "success")
+    }
 
-  const onchange = (e) => {
-    setenote({ ...enote, [e.target.name]: e.target.value });
-  };
 
-  const handleEdit = (e) => {
-    e.preventDefault();
-    editNote(enote._id, enote.title, enote.description, enote.tag);
-    refclose.current.click();
+    return (
+        <>
+            <div className='my-5' >
+                <div >
+                    <h3>🧾 Your Notes:</h3>
+                </div>
+                <div className="d-flex py-3     justify-content-center">
+                  <input
+                    className="form-control me-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                    value={search}
+                    onChange={(e)=>{setSearch(e.target.value.toLowerCase())}}
+                  />
+                 
+                </div>
+            </div>
+            
 
-    props.showAlert("Note is updated successfully", "success");
-  };
+            <EditNote reference={ref} closeref={refclose} enote={enote} onchange={onchange} handleChange={handleEdit} />
 
-  return (
-    <>
-      <div className="my-5">
-        <div>
-          <h3>🧾 Your Notes:</h3>
-        </div>
-        <div className="d-flex py-3     justify-content-center">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value.toLowerCase());
-            }}
-          />
-        </div>
-        <div className="d-flex justify-content-between">
-          <div>
-            <span className="">Date </span>
-            <select className="" onChange={(e) => setSort(e.target.value)}>
-              <option disabled>By date</option>
-              <option value="newest">newest</option>
-              <option value="oldest">oldest</option>
-            </select>
-          </div>
-          <div className="m-2">
-            <label htmlFor="tag" className="form-label">
-              Tag
-            </label>
-            <select onChange={(e) => setTags(e.target.value)}>
-              <option value="All">All</option>
-              <option value="Todo">Todo</option>
-              <option value="Important">Important</option>
-              <option value="Academic">Academic</option>
-              <option value="Personal">Personal</option>
-              <option value="Others">Others</option>
-            </select>
-          </div>
-        </div>
-      </div>
+            <div className='row mb-5'>
+                <div className='mx-3'>
+                    {notes.length === 0 && "No notes to display.."}
+                </div>
+                {notes.filter((item) => {
+        return item.title.toLowerCase().includes(search)&& item;
+      }).map((note) => {
+                    return <NoteItems key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert} />
+                })}
 
-      <EditNote
-        reference={ref}
-        closeref={refclose}
-        enote={enote}
-        onchange={onchange}
-        handleChange={handleEdit}
-      />
-
-      <div className="row mb-5">
-        <div className="mx-3">
-          {notes.length === 0 && "No notes to display.."}
-        </div>
-        {transformedNotes()
-          .filter((item) => {
-            return item.title.toLowerCase().includes(search) && item;
-          })
-          .map((note) => {
-            return (
-              <NoteItems
-                key={note._id}
-                note={note}
-                updateNote={updateNote}
-                showAlert={props.showAlert}
-              />
-            );
-          })}
-      </div>
-    </>
-  );
+            </div>
+        </>
+    )
 }
 
-export default Notes;
+export default Notes

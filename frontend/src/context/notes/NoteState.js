@@ -77,6 +77,7 @@ const NoteState = (props) => {
         element.title = title;
         element.description = description;
         element.tag = tag;
+        element.date = Date.now();
         break;
       }
     }
