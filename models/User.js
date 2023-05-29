@@ -1,5 +1,5 @@
 const mongoose= require('mongoose') ;
-const { Schema } = mongoose;
+const { Schema } = mongoose; // to make schema we import schema module from mongoose
 
 const userSchema = new Schema({
     email: {
@@ -21,5 +21,6 @@ const userSchema = new Schema({
     },
 
 });
-
+// here user is the name of collection in database
+// userSchema is the schema of the collection 
 module.exports=  mongoose.model('user', userSchema)

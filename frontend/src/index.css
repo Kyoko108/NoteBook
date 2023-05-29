@@ -5,12 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("./image/bg-cover.jpeg");
-  background-repeat: no-repeat;
-  background-size:cover; 
-  background-position:center;
- 
-  
+  background:linear-gradient(0.40turn, #3f87a6, #ebf8e1, #3f87a6), fixed; 
 }
 
 code {

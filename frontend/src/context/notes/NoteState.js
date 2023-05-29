@@ -1,99 +1,93 @@
-
 import NoteContext from "./noteContext";
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 const NoteState = (props) => {
-  const notesInitial = []
+  const notesInitial = [];
 
   const [notes, setnotes] = useState(notesInitial);
 
   //get all notes
   const getNote = async () => {
-    const response = await fetch('api/notes/fetchallnotes', {
-      method: 'GET',
+    const response = await fetch("api/notes/fetchallnotes", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'auth-token':localStorage.getItem('token')
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
       },
-
     });
 
     const json = await response.json();
-    setnotes(json)
-  }
+    setnotes(json);
+  };
 
   //add a note
   const addNote = async (title, description, tag) => {
-
-    const response = await fetch('api/notes/addnote', {
-      method: 'POST',
+    const response = await fetch("api/notes/addnote", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'auth-token':localStorage.getItem('token')
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
       },
-      body: JSON.stringify({ title, description, tag })
-
+      body: JSON.stringify({ title, description, tag }),
     });
- 
+
     const note = await response.json();
-    setnotes(notes.concat(note))
-  }
+    setnotes(notes.concat(note));
+  };
 
   //delete a note
-  const deleteNote = async(id) => {
+  const deleteNote = async (id) => {
     //a\Api call to delete
     const response = await fetch(`api/notes/deletenote/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-        'auth-token':localStorage.getItem('token')
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
       },
-
     });
 
     const json = await response.json();
-    console.log(json)
+    console.log(json);
 
-  //Clint side code
+    //Clint side code
     const newnotes = notes.filter((note) => {
-      return id !== note._id
+      return id !== note._id;
     });
-    setnotes(newnotes)
-  }
+    setnotes(newnotes);
+  };
 
   //edit a note
   const editNote = async (id, title, description, tag) => {
-
     const response = await fetch(`api/notes/updatenote/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        'auth-token':localStorage.getItem('token')
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
       },
 
-      body: JSON.stringify({ title, description, tag })
+      body: JSON.stringify({ title, description, tag }),
     });
     const json = await response.json();
-   console.log(json)
+    console.log(json);
 
-    let newNote=JSON.parse(JSON.stringify(notes))
+    let newNote = JSON.parse(JSON.stringify(notes));
     for (let index = 0; index < newNote.length; index++) {
       let element = newNote[index];
-      if(element._id===id){ 
-      element.title = title;
-      element.description = description;
-      element.tag = tag;
-      break;
+      if (element._id === id) {
+        element.title = title;
+        element.description = description;
+        element.tag = tag;
+        break;
       }
     }
-    setnotes(newNote)
-  }
+    setnotes(newNote);
+  };
 
   return (
     <NoteContext.Provider value={{ notes, getNote, addNote, deleteNote, editNote }}>
       {props.children}
     </NoteContext.Provider>
-  )
-}
+  );
+};
 
-export default NoteState
+export default NoteState;

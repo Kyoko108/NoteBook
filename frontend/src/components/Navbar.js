@@ -1,54 +1,78 @@
-import React from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+
+import React, { useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { ImExit} from "react-icons/im";
+import { MdAccountCircle} from "react-icons/md";
+
+import "./componentStyle/Navbar.css";
 
 function Navbar() {
-
+    const navRef = useRef();
     const navigate = useNavigate();
+
     const location = useLocation();
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        navigate('/login')
-    }
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
 
+
+    const showNavbar = () => {
+        navRef.current.classList.toggle(
+            "responsive_nav"
+        );
+    };
 
     return (
-        <div>
-            <nav className="navbar navbar-expand-lg navbar-light"  style={{backgroundColor: "#e3f2fd",opacity:"70%"}}>
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="#">NOTEBOOK</a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link to="/notes" className={`nav-link ${location.pathname === "/notes" ? "active" : ""}`} aria-current="page" >Your Notes</Link>
-                            </li>
+        <header>
+        <div >
+            <h3 className="logo">NOTEBOOK</h3>
+            <nav ref={navRef}>
+                <Link to="/#" className="underline-hover-effect">Home</Link>
+                <Link to="/notes" className="underline-hover-effect" >Your Notes</Link>
+                <Link to="/" className="underline-hover-effect">Add Notes</Link>
+                <Link to="/about" className="underline-hover-effect">About</Link>
+                 
+                  { (localStorage.getItem("token") && localStorage.getItem("name")) ? (
+                    <Link  className="underline-hover-effect username"><MdAccountCircle className="userIcon" />{localStorage.getItem("name")}</Link>
+                            
+                        ) : (
+                            ""
+                        )}
+                
 
-                            <li className="nav-item">
-                                <Link to="/" className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" >AddNote</Link>
-                            </li>
+                <button
+                    className="nav-btn nav-close-btn"
+                    onClick={showNavbar}>
+                    <FaTimes />
+                </button>
 
-                            <li className="nav-item" >
-                                <Link to="/about" className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} >About</Link>
-                            </li>
-                        </ul>
-
-
-                        {!localStorage.getItem('token') ?
-                            <form className='d-flex'>
-                                <Link to="/login" className={`nav-link ${location.pathname === "/login" ? "active" : ""}`} >Login</Link>
-                                <Link to="/signup" className={`nav-link ${location.pathname === "/signup" ? "active" : ""}`} >SignUp</Link>
-                            </form> :
-                            <Link to="/login" onClick={handleLogout} className={`nav-link ${location.pathname === "/logout" ? "active" : ""}`} >Logout</Link>
-                        }
-
-                    </div>
-                </div>
             </nav>
+            </div>
 
+            <div>
 
-        </div>
-    )
+             {!localStorage.getItem("token") ? (
+                    <div className="authbuttons">
+                        <button className="auth-btn auth"><Link to="/login">Login</Link></button>
+                        <button className="auth-btn auth"><Link to="/signup">SignUp</Link></button>
+                    </div>
+                ) : (
+                    <div className="authbuttons">
+                        <button className="auth-btn" onClick={handleLogout}><Link to="/login">Logout <ImExit /> </Link></button>
+                    </div>
+                )}
+
+         
+            <button
+                className="nav-btn"
+                onClick={showNavbar}>
+                <FaBars />
+            </button>
+            </div>
+        </header>
+    );
 }
-export default Navbar
+
+export default Navbar;
