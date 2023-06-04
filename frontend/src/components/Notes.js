@@ -9,6 +9,7 @@ function Notes(props) {
     const { notes, getNote, editNote } = context;
     const [enote, setenote] = useState({ id: "", title: "", description: "", tag: "default" })
     const navigate = useNavigate();
+    const [search, setSearch] = useState("")
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -48,15 +49,29 @@ function Notes(props) {
                 <div >
                     <h3>🧾 Your Notes:</h3>
                 </div>
-
+                <div className="d-flex py-3     justify-content-center">
+                  <input
+                    className="form-control me-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                    value={search}
+                    onChange={(e)=>{setSearch(e.target.value.toLowerCase())}}
+                  />
+                 
+                </div>
             </div>
+            
+
             <EditNote reference={ref} closeref={refclose} enote={enote} onchange={onchange} handleChange={handleEdit} />
 
             <div className='row mb-5'>
                 <div className='mx-3'>
                     {notes.length === 0 && "No notes to display.."}
                 </div>
-                {notes.map((note) => {
+                {notes.filter((item) => {
+        return item.title.toLowerCase().includes(search)&& item;
+      }).map((note) => {
                     return <NoteItems key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert} />
                 })}
 
