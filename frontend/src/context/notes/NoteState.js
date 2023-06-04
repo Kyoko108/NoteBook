@@ -31,8 +31,12 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
 
+
     const note = await response.json();
-    setnotes(notes.concat(note));
+    console.log(note);
+    console.log(typeof note);
+    
+    // setnotes(notes.concat(note));
   };
 
   //delete a note

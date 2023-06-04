@@ -31,7 +31,7 @@ function App() {
           <Navbar />
           <Alert alert={alert} />
 
-          <div className="container my-5">
+          <div className="container my-0">
             <Routes>
               <Route path="/" element={<AddNote showAlert={showAlert} />} />
               <Route path="/notes" element={<Notes showAlert={showAlert} />} />
